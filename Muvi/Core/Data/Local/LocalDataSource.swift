@@ -11,16 +11,17 @@ import Combine
 
 protocol LocalDataSourceProtocol: AnyObject {
   func getMovies() -> AnyPublisher<[MovieEntity], Error>
-  func saveMovie(from movie: MovieEntity) -> AnyPublisher<Bool, Error>
+  func addMovies(from movies: [MovieEntity]) -> AnyPublisher<Bool, Error>
+  func saveMovieToFavorite(from movie: MovieEntity) -> AnyPublisher<Bool, Error>
 }
 
 final class LocalDataSource: NSObject {
   private let realm: Realm?
-
+  
   private init(realm: Realm?) {
     self.realm = realm
   }
-
+  
   static let sharedInstance: (Realm?) -> LocalDataSource = { realmDatabase in
     return LocalDataSource(realm: realmDatabase)
   }
@@ -40,7 +41,26 @@ extension LocalDataSource: LocalDataSourceProtocol {
     }.eraseToAnyPublisher()
   }
   
-  func saveMovie(from movie: MovieEntity) -> AnyPublisher<Bool, Error> {
+  func addMovies(from movies: [MovieEntity]) -> AnyPublisher<Bool, Error> {
+    return Future<Bool, Error> { completion in
+      if let realm = self.realm {
+        do {
+          try realm.write {
+            for movie in movies {
+              realm.add(movie, update: .all)
+            }
+            completion(.success(true))
+          }
+        } catch {
+          completion(.failure(DatabaseError.requestFailed))
+        }
+      } else {
+        completion(.failure(DatabaseError.invalidInstance))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func saveMovieToFavorite(from movie: MovieEntity) -> AnyPublisher<Bool, Error> {
     return Future<Bool, Error> { completion in
       if let realm = self.realm {
         do {
