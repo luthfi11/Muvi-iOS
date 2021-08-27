@@ -9,10 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
   @EnvironmentObject var homePresenter: HomePresenter
-
+  
   var body: some View {
-    NavigationView {
+    TabView {
       HomeView(presenter: homePresenter)
+        .tabItem {
+          Label("Home", systemImage: "house.fill")
+        }
+      AboutView()
+        .tabItem {
+          Label("About", systemImage: "person.crop.circle")
+        }
+    }
+    .accentColor(.red)
+    .onAppear {
+      UITabBar.appearance().barTintColor = .white
     }
   }
 }
