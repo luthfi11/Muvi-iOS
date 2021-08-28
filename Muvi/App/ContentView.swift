@@ -12,14 +12,19 @@ struct ContentView: View {
   
   var body: some View {
     TabView {
-      HomeView(presenter: homePresenter)
-        .tabItem {
-          Label("Home", systemImage: "house.fill")
-        }
-      AboutView()
-        .tabItem {
-          Label("About", systemImage: "person.crop.circle")
-        }
+      NavigationView {
+        HomeView(presenter: homePresenter)
+      }
+      .tabItem {
+        Label("Home", systemImage: "house.fill")
+      }
+      
+      NavigationView {
+        AboutView()
+      }
+      .tabItem {
+        Label("About", systemImage: "person.crop.circle")
+      }
     }
     .accentColor(.red)
     .onAppear {
