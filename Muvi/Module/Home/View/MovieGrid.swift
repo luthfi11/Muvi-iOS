@@ -30,7 +30,8 @@ struct MovieGrid: View {
         leading: 5,
         bottom: 0,
         trailing: 5
-      ))
+      )
+    )
   }
 }
 

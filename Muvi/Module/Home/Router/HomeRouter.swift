@@ -9,4 +9,9 @@ import SwiftUI
 
 class HomeRouter {
 
+  func makeDetailView(for movie: MovieModel) -> some View {
+    let detailUseCase = Injection.init().provideDetail(movie: movie)
+    let presenter = MovieDetailPresenter(detailUseCase: detailUseCase)
+    return MovieDetailView(presenter: presenter)
+  }
 }

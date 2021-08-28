@@ -37,4 +37,8 @@ class HomePresenter: ObservableObject {
       })
       .store(in: &cancellables)
   }
+  
+  func linkBuilder<Content: View>(for movie: MovieModel, @ViewBuilder content: () -> Content) -> some View {
+    NavigationLink(destination: router.makeDetailView(for: movie)) { content() }
+  }
 }

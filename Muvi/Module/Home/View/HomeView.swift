@@ -20,7 +20,9 @@ struct HomeView: View {
         ScrollView {
           LazyVGrid(columns: gridItem) {
             ForEach(self.presenter.movies, id: \.id) { movie in
-              MovieGrid(movie: movie)
+              self.presenter.linkBuilder(for: movie) {
+                MovieGrid(movie: movie)
+              }.buttonStyle(PlainButtonStyle())
             }
           }
           .padding(10)
