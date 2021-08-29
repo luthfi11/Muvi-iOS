@@ -29,6 +29,11 @@ final class Injection: NSObject {
     return DetailInteractor(repository: repository, movie: movie)
   }
   
+  func provideSearch() -> SearchUseCase {
+    let repository = provideRepository()
+    return SearchInteractor(repository: repository)
+  }
+  
   func provideFavorite() -> FavoriteUseCase {
     let repository = provideRepository()
     return FavoriteInteractor(repository: repository)

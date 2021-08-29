@@ -22,12 +22,14 @@ enum Endpoints {
     case movies
     case image
     case backdrop
+    case search
     
     public var url: String {
       switch self {
       case .movies: return "\(API.baseUrl)movie/now_playing?api_key=\(API.apiKey)"
       case .image: return "\(API.imageBaseUrl)w185"
       case .backdrop: return "\(API.imageBaseUrl)w780"
+      case .search: return "\(API.baseUrl)search/movie?api_key=\(API.apiKey)&query="
       }
     }
   }

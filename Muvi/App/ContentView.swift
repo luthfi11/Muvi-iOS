@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
 
   @EnvironmentObject var homePresenter: HomePresenter
+  @EnvironmentObject var searchMoviePresenter: SearchMoviePresenter
   @EnvironmentObject var favoritePresenter: FavoritePresenter
   
   var body: some View {
@@ -18,7 +19,14 @@ struct ContentView: View {
         HomeView(presenter: homePresenter)
       }
       .tabItem {
-        Label("Home", systemImage: "house.fill")
+        Label("Home", systemImage: "house")
+      }
+      
+      NavigationView {
+        SearchMovieView(presenter: searchMoviePresenter)
+      }
+      .tabItem {
+        Label("Search", systemImage: "magnifyingglass")
       }
       
       NavigationView {
@@ -32,7 +40,7 @@ struct ContentView: View {
         AboutView()
       }
       .tabItem {
-        Label("About", systemImage: "person.crop.circle")
+        Label("About", systemImage: "person")
       }
     }
     .accentColor(.red)

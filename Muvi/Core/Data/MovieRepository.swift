@@ -13,6 +13,7 @@ protocol MovieRepositoryProtocol {
   func getMovie(by id: Int) -> AnyPublisher<MovieModel, Error>
   func updateFavoriteMovie(by id: Int) -> AnyPublisher<MovieModel, Error>
   func getFavoriteMovies() -> AnyPublisher<[MovieModel], Error>
+  func searchMovies(by title: String) -> AnyPublisher<[MovieModel], Error>
 }
 
 final class MovieRepository: NSObject {
@@ -69,5 +70,27 @@ extension MovieRepository: MovieRepositoryProtocol {
     return self.local.updateFavoriteMovie(by: id)
       .map { MovieMapper.mapMovieEntityToDomains(input: $0) }
       .eraseToAnyPublisher()
+  }
+  
+  func searchMovies(by title: String) -> AnyPublisher<[MovieModel], Error> {
+    return self.remote.searchMovies(by: title)
+      .map { MovieMapper.mapMovieResponsesToEntities(input: $0) }
+      .catch { _ in self.local.getMoviesByTitle(title) }
+      .flatMap { responses  in
+        self.local.getMoviesByTitle(title)
+          .flatMap { local -> AnyPublisher<[MovieModel], Error> in
+            if responses.count > local.count {
+              return self.local.addMoviesByTitle(title, from: responses)
+                .filter { $0 }
+                .flatMap { _ in self.local.getMoviesByTitle(title)
+                  .map { MovieMapper.mapMovieEntitiesToDomains(input: $0) }
+                }.eraseToAnyPublisher()
+            } else {
+              return self.local.getMoviesByTitle(title)
+                .map { MovieMapper.mapMovieEntitiesToDomains(input: $0) }
+                .eraseToAnyPublisher()
+            }
+          }
+      }.eraseToAnyPublisher()
   }
 }
