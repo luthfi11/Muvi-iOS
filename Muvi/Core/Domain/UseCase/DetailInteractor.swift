@@ -10,6 +10,8 @@ import Combine
 
 protocol DetailUseCase {
   func getMovie() -> MovieModel
+  func getMovie() -> AnyPublisher<MovieModel, Error>
+  func updateFavoriteMovie() -> AnyPublisher<MovieModel, Error>
 }
 
 class DetailInteractor: DetailUseCase {
@@ -24,4 +26,12 @@ class DetailInteractor: DetailUseCase {
   func getMovie() -> MovieModel {
     return movie
   }
+
+  func getMovie() -> AnyPublisher<MovieModel, Error> {
+    return repository.getMovie(by: movie.id)
+  }
+  
+  func updateFavoriteMovie() -> AnyPublisher<MovieModel, Error> {
+      return repository.updateFavoriteMovie(by: movie.id)
+    }
 }

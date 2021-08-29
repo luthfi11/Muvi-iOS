@@ -17,6 +17,9 @@
 		3E2112D426D2887300826AAF /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2112D326D2887300826AAF /* HomePresenter.swift */; };
 		3E2112D626D2896F00826AAF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2112D526D2896F00826AAF /* HomeView.swift */; };
 		3E2112D826D28A1100826AAF /* MovieGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2112D726D28A1100826AAF /* MovieGrid.swift */; };
+		3E4714FA26DB5C0D00747B5B /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4714F926DB5C0D00747B5B /* FavoriteInteractor.swift */; };
+		3E4714FC26DB5C8100747B5B /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4714FB26DB5C8100747B5B /* FavoritePresenter.swift */; };
+		3E4714FE26DB5CB800747B5B /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4714FD26DB5CB800747B5B /* FavoriteRouter.swift */; };
 		3E50A75326C90613007DF770 /* MuviApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50A75226C90613007DF770 /* MuviApp.swift */; };
 		3E50A75526C90613007DF770 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50A75426C90613007DF770 /* ContentView.swift */; };
 		3E50A75726C90616007DF770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E50A75626C90616007DF770 /* Assets.xcassets */; };
@@ -35,6 +38,7 @@
 		3E54929526DA376600B70624 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54929426DA376600B70624 /* MovieDetailView.swift */; };
 		3E54929726DA377B00B70624 /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54929626DA377B00B70624 /* MovieDetailPresenter.swift */; };
 		3E54929926DA378F00B70624 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54929826DA378F00B70624 /* DetailInteractor.swift */; };
+		3E54929E26DA585400B70624 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54929D26DA585400B70624 /* FavoriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,9 @@
 		3E2112D326D2887300826AAF /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		3E2112D526D2896F00826AAF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3E2112D726D28A1100826AAF /* MovieGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGrid.swift; sourceTree = "<group>"; };
+		3E4714F926DB5C0D00747B5B /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		3E4714FB26DB5C8100747B5B /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		3E4714FD26DB5CB800747B5B /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
 		3E50A74F26C90613007DF770 /* Muvi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muvi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E50A75226C90613007DF770 /* MuviApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuviApp.swift; sourceTree = "<group>"; };
 		3E50A75426C90613007DF770 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +71,7 @@
 		3E54929426DA376600B70624 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		3E54929626DA377B00B70624 /* MovieDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailPresenter.swift; sourceTree = "<group>"; };
 		3E54929826DA378F00B70624 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		3E54929D26DA585400B70624 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +265,9 @@
 		3E50A76B26C90798007DF770 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				3E54929C26DA580D00B70624 /* Presenter */,
+				3E54929B26DA580800B70624 /* Router */,
+				3E54929A26DA57FC00B70624 /* View */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -274,6 +285,7 @@
 			children = (
 				3E2112CA26D285B800826AAF /* HomeInteractor.swift */,
 				3E54929826DA378F00B70624 /* DetailInteractor.swift */,
+				3E4714F926DB5C0D00747B5B /* FavoriteInteractor.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -333,6 +345,30 @@
 			isa = PBXGroup;
 			children = (
 				3E54929626DA377B00B70624 /* MovieDetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		3E54929A26DA57FC00B70624 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3E54929D26DA585400B70624 /* FavoriteView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3E54929B26DA580800B70624 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				3E4714FD26DB5CB800747B5B /* FavoriteRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		3E54929C26DA580D00B70624 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				3E4714FB26DB5C8100747B5B /* FavoritePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -419,7 +455,9 @@
 			files = (
 				3E50F3FD26D3DEE100149D6D /* DateFormat.swift in Sources */,
 				3E2112CD26D2865C00826AAF /* Injection.swift in Sources */,
+				3E4714FC26DB5C8100747B5B /* FavoritePresenter.swift in Sources */,
 				3E50A77E26C90F6A007DF770 /* MovieRepository.swift in Sources */,
+				3E4714FE26DB5CB800747B5B /* FavoriteRouter.swift in Sources */,
 				3E2112D826D28A1100826AAF /* MovieGrid.swift in Sources */,
 				3E2112C926D27E9D00826AAF /* MovieMapper.swift in Sources */,
 				3E2112D426D2887300826AAF /* HomePresenter.swift in Sources */,
@@ -431,6 +469,7 @@
 				3E54929526DA376600B70624 /* MovieDetailView.swift in Sources */,
 				3E2112CB26D285B800826AAF /* HomeInteractor.swift in Sources */,
 				3E50A77A26C90CFC007DF770 /* MovieModel.swift in Sources */,
+				3E4714FA26DB5C0D00747B5B /* FavoriteInteractor.swift in Sources */,
 				3E54929926DA378F00B70624 /* DetailInteractor.swift in Sources */,
 				3E2112D226D287FF00826AAF /* HomeRouter.swift in Sources */,
 				3E50A75526C90613007DF770 /* ContentView.swift in Sources */,
@@ -439,6 +478,7 @@
 				3E04B10A26D8EA6A00E5BB7F /* AboutView.swift in Sources */,
 				3E50A78626C912EA007DF770 /* APICall.swift in Sources */,
 				3E50A75326C90613007DF770 /* MuviApp.swift in Sources */,
+				3E54929E26DA585400B70624 /* FavoriteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

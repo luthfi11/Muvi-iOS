@@ -19,6 +19,7 @@ final class RemoteDataSource: NSObject {
 }
 
 extension RemoteDataSource: RemoteDataSourceProtocol {
+
   func getMovies() -> AnyPublisher<[MovieResponse], Error> {
     return Future<[MovieResponse], Error> { completion in
       if let url = URL(string: Endpoints.Gets.movies.url) {

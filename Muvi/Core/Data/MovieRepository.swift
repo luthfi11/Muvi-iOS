@@ -10,6 +10,9 @@ import Combine
 
 protocol MovieRepositoryProtocol {
   func getMovies() -> AnyPublisher<[MovieModel], Error>
+  func getMovie(by id: Int) -> AnyPublisher<MovieModel, Error>
+  func updateFavoriteMovie(by id: Int) -> AnyPublisher<MovieModel, Error>
+  func getFavoriteMovies() -> AnyPublisher<[MovieModel], Error>
 }
 
 final class MovieRepository: NSObject {
@@ -29,6 +32,7 @@ final class MovieRepository: NSObject {
 }
 
 extension MovieRepository: MovieRepositoryProtocol {
+  
   func getMovies() -> AnyPublisher<[MovieModel], Error> {
     return self.local.getMovies()
       .flatMap { result -> AnyPublisher<[MovieModel], Error> in
@@ -47,5 +51,23 @@ extension MovieRepository: MovieRepositoryProtocol {
             .eraseToAnyPublisher()
         }
       }.eraseToAnyPublisher()
+  }
+  
+  func getMovie(by id: Int) -> AnyPublisher<MovieModel, Error> {
+    return self.local.getMovie(by: id)
+      .map { MovieMapper.mapMovieEntityToDomains(input: $0) }
+      .eraseToAnyPublisher()
+  }
+  
+  func getFavoriteMovies() -> AnyPublisher<[MovieModel], Error> {
+    return self.local.getFavoriteMovies()
+      .map { MovieMapper.mapMovieEntitiesToDomains(input: $0) }
+      .eraseToAnyPublisher()
+  }
+  
+  func updateFavoriteMovie(by id: Int) -> AnyPublisher<MovieModel, Error> {
+    return self.local.updateFavoriteMovie(by: id)
+      .map { MovieMapper.mapMovieEntityToDomains(input: $0) }
+      .eraseToAnyPublisher()
   }
 }

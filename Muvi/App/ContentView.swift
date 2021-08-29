@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+
   @EnvironmentObject var homePresenter: HomePresenter
+  @EnvironmentObject var favoritePresenter: FavoritePresenter
   
   var body: some View {
     TabView {
@@ -17,6 +19,13 @@ struct ContentView: View {
       }
       .tabItem {
         Label("Home", systemImage: "house.fill")
+      }
+      
+      NavigationView {
+        FavoriteView(presenter: favoritePresenter)
+      }
+      .tabItem {
+        Label("Favorite", systemImage: "heart")
       }
       
       NavigationView {
@@ -30,11 +39,5 @@ struct ContentView: View {
     .onAppear {
       UITabBar.appearance().barTintColor = .white
     }
-  }
-}
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
   }
 }

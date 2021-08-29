@@ -11,8 +11,10 @@ import Combine
 
 protocol LocalDataSourceProtocol: AnyObject {
   func getMovies() -> AnyPublisher<[MovieEntity], Error>
+  func getMovie(by id: Int) -> AnyPublisher<MovieEntity, Error>
   func addMovies(from movies: [MovieEntity]) -> AnyPublisher<Bool, Error>
-  func saveMovieToFavorite(from movie: MovieEntity) -> AnyPublisher<Bool, Error>
+  func updateFavoriteMovie(by id: Int) -> AnyPublisher<MovieEntity, Error>
+  func getFavoriteMovies() -> AnyPublisher<[MovieEntity], Error>
 }
 
 final class LocalDataSource: NSObject {
@@ -28,6 +30,7 @@ final class LocalDataSource: NSObject {
 }
 
 extension LocalDataSource: LocalDataSourceProtocol {
+
   func getMovies() -> AnyPublisher<[MovieEntity], Error> {
     return Future<[MovieEntity], Error> { completion in
       if let realm = self.realm {
@@ -35,6 +38,23 @@ extension LocalDataSource: LocalDataSourceProtocol {
           realm.objects(MovieEntity.self)
         }()
         completion(.success(movies.toArray(ofType: MovieEntity.self)))
+      } else {
+        completion(.failure(DatabaseError.invalidInstance))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func getMovie(by id: Int) -> AnyPublisher<MovieEntity, Error> {
+    return Future<MovieEntity, Error> { completion in
+      if let realm = self.realm {
+        let movies: Results<MovieEntity> = {
+          realm.objects(MovieEntity.self).filter("id = \(id)")
+        }()
+        guard let movie = movies.first else {
+          completion(.failure(DatabaseError.requestFailed))
+          return
+        }
+        completion(.success(movie))
       } else {
         completion(.failure(DatabaseError.invalidInstance))
       }
@@ -60,17 +80,33 @@ extension LocalDataSource: LocalDataSourceProtocol {
     }.eraseToAnyPublisher()
   }
   
-  func saveMovieToFavorite(from movie: MovieEntity) -> AnyPublisher<Bool, Error> {
-    return Future<Bool, Error> { completion in
-      if let realm = self.realm {
+  func updateFavoriteMovie(by id: Int) -> AnyPublisher<MovieEntity, Error> {
+    return Future<MovieEntity, Error> { completion in
+      if let realm = self.realm, let movieEntity = {
+        realm.objects(MovieEntity.self).filter("id = \(id)")
+      }().first {
         do {
           try realm.write {
-            realm.add(movie, update: .all)
-            completion(.success(true))
+            movieEntity.setValue(!movieEntity.favorite, forKey: "favorite")
           }
+          completion(.success(movieEntity))
         } catch {
           completion(.failure(DatabaseError.requestFailed))
         }
+      } else {
+        completion(.failure(DatabaseError.invalidInstance))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func getFavoriteMovies() -> AnyPublisher<[MovieEntity], Error> {
+    return Future<[MovieEntity], Error> { completion in
+      if let realm = self.realm {
+        let movieEntities = {
+          realm.objects(MovieEntity.self)
+            .filter("favorite = \(true)")
+        }()
+        completion(.success(movieEntities.toArray(ofType: MovieEntity.self)))
       } else {
         completion(.failure(DatabaseError.invalidInstance))
       }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+
   @ObservedObject var presenter: HomePresenter
+
   let gridItem = [GridItem(.flexible()), GridItem(.flexible())]
   
   var body: some View {

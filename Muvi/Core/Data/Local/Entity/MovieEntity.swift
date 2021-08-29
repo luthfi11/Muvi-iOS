@@ -19,6 +19,7 @@ class MovieEntity: Object {
   @objc dynamic var voteCount: Int = 0
   @objc dynamic var overview: String = ""
   @objc dynamic var language: String = ""
+  @objc dynamic var favorite = false
   
   override static func primaryKey() -> String? {
     return "id"

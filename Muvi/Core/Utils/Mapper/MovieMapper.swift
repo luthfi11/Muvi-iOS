@@ -36,7 +36,8 @@ final class MovieMapper {
         voteAverage: result.voteAverage,
         voteCount: result.voteCount,
         overview: result.overview,
-        language: result.language
+        language: result.language,
+        favorite: result.favorite
       )
     }
   }
@@ -56,5 +57,21 @@ final class MovieMapper {
         language: result.language
       )
     }
+  }
+  
+  static func mapMovieEntityToDomains(input movieEntities: MovieEntity) -> MovieModel {
+    return MovieModel(
+      id: movieEntities.id,
+      title: movieEntities.title,
+      releaseDate: movieEntities.releaseDate,
+      posterPath: movieEntities.posterPath,
+      backdropPath: movieEntities.backdropPath,
+      popularity: movieEntities.popularity,
+      voteAverage: movieEntities.voteAverage,
+      voteCount: movieEntities.voteCount,
+      overview: movieEntities.overview,
+      language: movieEntities.language,
+      favorite: movieEntities.favorite
+    )
   }
 }

@@ -9,7 +9,9 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct MovieDetailView: View {
+  
   @ObservedObject var presenter: MovieDetailPresenter
+  @State private var showSuccessAlert = false
   
   var body: some View {
     ScrollView(.vertical) {
@@ -20,6 +22,27 @@ struct MovieDetailView: View {
         content
       }
       .offset(y: -95)
+    }
+    .onAppear {
+      presenter.getMovie()
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {
+          presenter.updateFavoriteMeal()
+          presenter.getMovie()
+          showSuccessAlert.toggle()
+        }) {
+          Image(systemName: presenter.movie.favorite ? "star.fill" : "star")
+        }
+      }
+    }
+    .alert(isPresented: $showSuccessAlert) {
+      Alert(
+        title: Text("Success"),
+        message: Text(presenter.movie.favorite ? "Movie saved successfully" : "Movie deleted successfully"),
+        dismissButton: .default(Text("Got it!"))
+      )
     }
   }
 }
@@ -42,7 +65,7 @@ extension MovieDetailView {
         .frame(width: 150, height: 225, alignment: .leading)
         .cornerRadius(8)
         .overlay(RoundedRectangle(cornerRadius: 8)
-        .stroke(Color.white, lineWidth: 2))
+                  .stroke(Color.white, lineWidth: 2))
         .shadow(radius: 5)
     }
     .offset(y: -100)
@@ -122,25 +145,5 @@ extension MovieDetailView {
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(16)
-  }
-}
-
-struct MovieDetailView_Previews: PreviewProvider {
-  static var previews: some View {
-    let movie = MovieModel(
-      id: 1,
-      title: "The Suicide Squad",
-      releaseDate: "2021-07-28",
-      posterPath: "/iCi4c4FvVdbaU1t8poH1gvzT6xM.jpg",
-      backdropPath: "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
-      popularity: 6286.069,
-      voteAverage: 8.1,
-      voteCount: 2767,
-      overview: "Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
-      language: "en"
-    )
-    let detailUseCase = Injection.init().provideDetail(movie: movie)
-    let presenter = MovieDetailPresenter(detailUseCase: detailUseCase)
-    MovieDetailView(presenter: presenter)
   }
 }
