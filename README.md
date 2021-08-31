@@ -4,5 +4,3 @@
 - Reactive Programming with Combine
 - Local Database (Realm)
 - Dependency Injection
-
-*Still in progress*
