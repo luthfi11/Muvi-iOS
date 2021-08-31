@@ -17,11 +17,20 @@ class SearchMoviePresenter: ObservableObject {
   @Published var errorMessage: String = ""
   @Published var isLoading: Bool = false
   @Published var isError: Bool = false
-  
-  var title = ""
+  @Published var title: String = ""
   
   init(searchUseCase: SearchUseCase) {
     self.searchUseCase = searchUseCase
+    binding()
+  }
+  
+  func binding() {
+    $title
+      .debounce(for: 0.5, scheduler: DispatchQueue.main)
+      .sink { [weak self] _ in
+        self?.searchMovies()
+      }
+      .store(in: &cancellables)
   }
   
   func searchMovies() {

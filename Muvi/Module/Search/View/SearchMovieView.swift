@@ -43,11 +43,7 @@ struct SearchMovieView: View {
 
 extension SearchMovieView {
   var searchBar: some View {
-    TextField("Search here...", text: $query)
-      .onChange(of: query) { newQuery in
-        presenter.title = newQuery
-        presenter.searchMovies()
-      }
+    TextField("Search here...", text: $presenter.title)
       .padding(15)
       .background(Color(.systemGray6))
       .cornerRadius(8)
