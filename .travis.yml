@@ -1,5 +1,0 @@
-language: swift
-osx_image: xcode12.5 
-xcode_project: Muvi.xcodeproj 
-xcode_scheme: Muvi
-xcode_destination: platform=iOS Simulator,OS=14.5,name=iPhone 12
