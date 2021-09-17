@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Core
+import Home
 
 struct ContentView: View {
 
-  @EnvironmentObject var homePresenter: HomePresenter
+  @EnvironmentObject var homePresenter: GetListPresenter<Any, MovieDomainModel, Interactor<Any, [MovieDomainModel], GetHomeRepository<GetHomeLocalDataSource, GetHomeRemoteDataSource, MovieTransformer>>>
   @EnvironmentObject var searchMoviePresenter: SearchMoviePresenter
   @EnvironmentObject var favoritePresenter: FavoritePresenter
   

@@ -6,23 +6,25 @@
 //
 
 import SwiftUI
+import Core
+import Home
 
 struct HomeView: View {
 
-  @ObservedObject var presenter: HomePresenter
+  @ObservedObject var presenter: GetListPresenter<Any, MovieDomainModel, Interactor<Any, [MovieDomainModel], GetHomeRepository<GetHomeLocalDataSource, GetHomeRemoteDataSource, MovieTransformer>>>
 
   let gridItem = [GridItem(.flexible()), GridItem(.flexible())]
   
   var body: some View {
     ZStack {
-      if presenter.loadingState {
+      if presenter.isLoading {
         ProgressView()
           .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
       } else {
         ScrollView {
           LazyVGrid(columns: gridItem) {
-            ForEach(self.presenter.movies, id: \.id) { movie in
-              self.presenter.linkBuilder(for: movie) {
+            ForEach(self.presenter.list, id: \.id) { movie in
+              ZStack {
                 MovieGrid(movie: movie)
               }.buttonStyle(PlainButtonStyle())
             }
@@ -32,8 +34,8 @@ struct HomeView: View {
       }
     }
     .onAppear {
-      if self.presenter.movies.count == 0 {
-        self.presenter.getMovies()
+      if self.presenter.list.count == 0 {
+        self.presenter.getList(request: nil)
       }
     }
     .navigationBarTitle(

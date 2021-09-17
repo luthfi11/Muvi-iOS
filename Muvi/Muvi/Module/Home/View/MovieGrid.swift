@@ -7,9 +7,11 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Core
+import Home
 
 struct MovieGrid: View {
-  var movie: MovieModel
+  var movie: MovieDomainModel
   var body: some View {
     VStack {
       ZStack(alignment: .topTrailing) {
@@ -65,24 +67,5 @@ extension MovieGrid {
         .foregroundColor(.gray)
         .font(.caption)
     }
-  }
-}
-
-struct MovieGrid_Previews: PreviewProvider {
-  static let movie = MovieModel(
-    id: 1,
-    title: "The Suicide Squad",
-    releaseDate: "2021-07-28",
-    posterPath: "/iCi4c4FvVdbaU1t8poH1gvzT6xM.jpg",
-    backdropPath: "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
-    popularity: 6286.069,
-    voteAverage: 8.1,
-    voteCount: 2767,
-    overview: "Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
-    language: "en"
-  )
-  
-  static var previews: some View {
-    MovieGrid(movie: movie)
   }
 }

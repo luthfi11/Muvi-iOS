@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Home
 
 struct FavoriteView: View {
   
