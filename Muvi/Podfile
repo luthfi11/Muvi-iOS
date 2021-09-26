@@ -1,0 +1,62 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '14.5'
+
+use_frameworks!
+
+workspace 'Muvi'
+
+target 'Muvi' do
+  # Pods for Muvi
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Common' do
+   project '../Common/Common'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Core' do
+   project '../Core/Core'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Home' do
+   project '../Home/Home'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Detail' do
+   project '../Detail/Detail'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Favorite' do
+   project '../Favorite/Favorite'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'Search' do
+   project '../Search/Search'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end
+
+target 'About' do
+   project '../About/About'
+      pod 'RealmSwift'
+      pod 'SDWebImageSwiftUI'
+      pod 'Alamofire'
+end

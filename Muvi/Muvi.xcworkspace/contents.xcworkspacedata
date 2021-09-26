@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../Common/Common.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Muvi.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Core/Core.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Home/Home.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../About/About.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Detail/Detail.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Favorite/Favorite.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Search/Search.xcodeproj">
+   </FileRef>
+</Workspace>
